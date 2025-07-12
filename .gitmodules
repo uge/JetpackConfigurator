@@ -4,3 +4,5 @@
 [submodule "vendor/TraquitoJetpack"]
 	path = vendor/TraquitoJetpack
 	url = https://github.com/dmalnati/TraquitoJetpack
+[submodule "picoinf"]
+	url = https://github.com/uge/picoinf
