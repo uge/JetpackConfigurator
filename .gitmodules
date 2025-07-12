@@ -1,8 +1,6 @@
 [submodule "vendor/picoinf"]
 	path = vendor/picoinf
-	url = https://github.com/dmalnati/picoinf
+	url = https://github.com/uge/picoinf
 [submodule "vendor/TraquitoJetpack"]
 	path = vendor/TraquitoJetpack
-	url = https://github.com/dmalnati/TraquitoJetpack
-[submodule "picoinf"]
-	url = https://github.com/uge/picoinf
+	url = https://github.com/uge/TraquitoJetpack
