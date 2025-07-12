@@ -1,3 +1,12 @@
+This work is based on work by Douglas Malnati including:
+
+https://github.com/dmalnati/picoinf
+https://github.com/dmalnati/TraquitoJetpack
+
+Please refer to the licenses of those works which are incorporated in the
+vendor directory.
+
+
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 
