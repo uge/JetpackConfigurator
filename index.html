@@ -3,42 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Static JavaScript Page</title>
+    <title>Jetpack Device Configurator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Welcome to Your Static JavaScript Page</h1>
+            <h1>Jetpack Device Configurator</h1>
         </header>
         
         <main>
             <section class="hero">
-                <h2>Getting Started</h2>
-                <p>This is a simple static JavaScript page template to get you started.</p>
-                <button id="clickBtn" class="btn">Click Me!</button>
+                <h2>Serial Device Connection</h2>
+                <p>Connect to your target device using WebSerial API</p>
+                <div class="connection-controls">
+                    <button id="connectBtn" class="btn">Connect Device</button>
+                    <button id="disconnectBtn" class="btn btn-secondary" disabled>Disconnect</button>
+                </div>
+                <div id="connectionStatus" class="status-display">
+                    <span class="status-indicator disconnected"></span>
+                    <span class="status-text">Not Connected</span>
+                </div>
             </section>
             
             <section class="content">
                 <div class="card">
-                    <h3>Dynamic Content</h3>
-                    <p id="dynamicText">This text will change when you click the button above.</p>
+                    <h3>Device Information</h3>
+                    <div id="deviceInfo" class="device-info">
+                        <p><strong>Port:</strong> <span id="portInfo">-</span></p>
+                        <p><strong>Vendor ID:</strong> <span id="vendorId">-</span></p>
+                        <p><strong>Product ID:</strong> <span id="productId">-</span></p>
+                        <p><strong>Serial Number:</strong> <span id="serialNumber">-</span></p>
+                    </div>
                 </div>
                 
                 <div class="card">
-                    <h3>Interactive Features</h3>
-                    <ul>
-                        <li>Responsive design</li>
-                        <li>Modern CSS styling</li>
-                        <li>JavaScript interactions</li>
-                        <li>Clean project structure</li>
-                    </ul>
+                    <h3>Jetpack Device Configuration</h3>
+                    <div id="configInfo" class="config-info">
+                        <div class="config-section">
+                            <h4>Radio Configuration</h4>
+                            <div class="config-grid">
+                                <div class="config-item">
+                                    <label>Band:</label>
+                                    <select id="configBand" class="config-input">
+                                        <option value="">-</option>
+                                    </select>
+                                </div>
+                                <div class="config-item">
+                                    <label>Channel:</label>
+                                    <input type="number" id="configChannel" class="config-input" min="0" max="599" placeholder="-">
+                                </div>
+                                <div class="config-item">
+                                    <label>Frequency Correction:</label>
+                                    <span id="configCorrection">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Callsign:</label>
+                                    <input type="text" id="configCallsign" class="config-input" maxlength="10" placeholder="-" pattern="[A-Z0-9]+">
+                                </div>
+                                <div class="config-item">
+                                    <label>Callsign Valid:</label>
+                                    <span id="configCallsignOk" class="status-badge">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-section">
+                            <h4>Temperature Data</h4>
+                            <div class="config-grid">
+                                <div class="config-item">
+                                    <label>Temperature:</label>
+                                    <span id="tempValue">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Last Updated:</label>
+                                    <span id="tempTimestamp">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-section">
+                            <h4>GPS Status</h4>
+                            <div class="config-grid">
+                                <div class="config-item">
+                                    <label>Status:</label>
+                                    <span id="gpsStatus" class="status-badge">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Satellites:</label>
+                                    <span id="gpsSatellites">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Antenna:</label>
+                                    <span id="gpsAntenna" class="status-badge">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Jamming:</label>
+                                    <span id="gpsJamming" class="status-badge">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Latitude:</label>
+                                    <span id="gpsLatitude">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Longitude:</label>
+                                    <span id="gpsLongitude">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Altitude:</label>
+                                    <span id="gpsAltitude">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Last Fix:</label>
+                                    <span id="gpsTimestamp">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>GPS Time:</label>
+                                    <span id="gpsTime">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Speed:</label>
+                                    <span id="gpsSpeed">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Course:</label>
+                                    <span id="gpsCourse">-</span>
+                                </div>
+                                <div class="config-item">
+                                    <label>Magnetic Variation:</label>
+                                    <span id="gpsMagVar">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="config-actions">
+                            <button id="refreshConfigBtn" class="btn btn-small" disabled>Refresh Config</button>
+                            <button id="saveConfigBtn" class="btn btn-small btn-primary" disabled>Save Configuration</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>Communication Test</h3>
+                    <div class="test-controls">
+                        <button id="pingBtn" class="btn btn-small" disabled>Send Ping</button>
+                        <button id="clearBtn" class="btn btn-small">Clear Log</button>
+                        <div class="filter-controls">
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="hideGpsLines" checked>
+                                <span class="checkmark"></span>
+                                Hide GPS_LINE messages
+                            </label>
+                        </div>
+                    </div>
+                    <div id="messageLog" class="message-log">
+                        <p class="log-placeholder">Connect to device to see messages...</p>
+                    </div>
+                </div>
+                
+                <div class="card">
+                    <h3>JSON API Interface</h3>
+                    <div class="api-controls">
+                        <select id="messageType" class="form-select">
+                            <option value="REQ_PING">REQ_PING</option>
+                            <option value="REQ_GET_DEVICE_INFO">REQ_GET_DEVICE_INFO</option>
+                            <option value="REQ_GET_CONFIG">REQ_GET_CONFIG</option>
+                            <option value="REQ_RADIO_POWER_ON">REQ_RADIO_POWER_ON</option>
+                            <option value="REQ_RADIO_POWER_OFF">REQ_RADIO_POWER_OFF</option>
+                            <option value="REQ_GPS_POWER_ON">REQ_GPS_POWER_ON</option>
+                            <option value="REQ_GPS_POWER_OFF">REQ_GPS_POWER_OFF</option>
+                        </select>
+                        <button id="sendMessageBtn" class="btn btn-small" disabled>Send Message</button>
+                    </div>
+                    <div class="json-editor">
+                        <textarea id="jsonInput" placeholder='{"type": "REQ_PING"}' disabled></textarea>
+                        <button id="sendJsonBtn" class="btn btn-small" disabled>Send JSON</button>
+                    </div>
                 </div>
             </section>
         </main>
         
         <footer>
-            <p>&copy; 2025 Your Static JavaScript Page</p>
+            <p>&copy; 2025 Device Configurator | <a href="JSON_INTERFACE.md" target="_blank">JSON API Documentation</a></p>
+            <div class="footer-info">
+                <p><strong>Based on:</strong></p>
+                <ul>
+                    <li><a href="https://github.com/dmalnati/picoinf" target="_blank">picoinf</a> - Core infrastructure and protocol implementation</li>
+                    <li><a href="https://github.com/dmalnati/TraquitoJetpack" target="_blank">TraquitoJetpack</a> - Device hardware and firmware</li>
+                </ul>
+                <p><small>Please refer to the individual project licenses for terms and conditions.</small></p>
+            </div>
         </footer>
     </div>
     
