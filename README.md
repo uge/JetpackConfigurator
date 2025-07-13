@@ -142,7 +142,7 @@ Then visit `https://127.0.0.1:8000` (note HTTPS requirement).
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the GNU AFFERO GENERAL PUBLIC LICENSE.
 
 ## Contributing
 
